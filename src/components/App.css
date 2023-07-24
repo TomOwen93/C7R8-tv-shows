@@ -1,3 +1,20 @@
 html {
     background: #f8f8f8;
 }
+
+.episode-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    border-radius: 20px;
+    box-shadow: 3px 3px 5px rgb(66, 65, 65);
+}
+
+.episode-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    padding: 20px;
+    column-gap: 30px;
+    row-gap: 30px;
+}
