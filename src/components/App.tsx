@@ -17,20 +17,17 @@ export interface IEpisode {
     rating?: { average: number };
     runtime?: number;
     image: {
-      medium: string;
-      original: string;
+        medium: string;
+        original: string;
     };
     summary: string;
     _links?: { self: { href: string } };
-  }
+}
 
 function App() {
-
     const allEpisodes = episodes.map((episode) => {
-        return <Episode 
-                    {...episode}
-                />
-    })
+        return <Episode {...episode} key={episode.id} />;
+    });
 
     return (
         <div className="App">
