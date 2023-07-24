@@ -28,12 +28,7 @@ function App() {
 
     const allEpisodes = episodes.map((episode) => {
         return <Episode 
-                    id={episode.id}
-                    name={episode.name}
-                    season={episode.season}
-                    number={episode.number}
-                    image={episode.image}
-                    summary={episode.summary}
+                    {...episode}
                 />
     })
 
