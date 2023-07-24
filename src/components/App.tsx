@@ -29,12 +29,7 @@ function App() {
         return <Episode {...episode} key={episode.id} />;
     });
 
-    return (
-        <div className="App">
-            <h1>Hello Neill from Oskar and Tom</h1>
-            {allEpisodes}
-        </div>
-    );
+    return <div className="episode-container">{allEpisodes}</div>;
 }
 
 export default App;
