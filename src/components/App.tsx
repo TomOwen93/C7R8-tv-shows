@@ -1,6 +1,7 @@
 import "./App.css";
 import episodes from "../episodes.json";
 import { Episode } from "./Episode";
+import Footer from "./Footer";
 console.log(`Imported ${episodes.length} episode(s)`);
 console.log(`First episode's name is ${episodes[0].name}`);
 
@@ -29,7 +30,12 @@ function App() {
         return <Episode {...episode} key={episode.id} />;
     });
 
-    return <div className="episode-container">{allEpisodes}</div>;
+    return (
+        <>
+            <div className="episode-container">{allEpisodes}</div>
+            <Footer />
+        </>
+    )
 }
 
 export default App;
