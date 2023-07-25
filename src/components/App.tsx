@@ -1,9 +1,11 @@
 import "./App.css";
 import SearchInput from "./SearchInput";
-import { Episode } from "./Episode";
 import Footer from "./Footer";
-import { useEffect, useState } from "react";
+import Selector from "./Selector";
 import filterInput from "../utils/filterinput";
+import { Episode } from "./Episode";
+import { useEffect, useState } from "react";
+import { Show } from "../utils/ShowInterface";
 
 export interface IEpisode {
     id: number;
@@ -25,20 +27,27 @@ export interface IEpisode {
     _links: { self: { href: string } };
 }
 
+export interface ShowInfo {
+    id: number;
+    name: string;
+}
+
 function App() {
     const [searchInput, setSearchInput] = useState("");
     const [episodesList, setEpisodesList] = useState<IEpisode[]>([]);
+    const [showsList, setShowsList] = useState<ShowInfo[]>([]);
 
-    const fetchEpisodes = async () => {
-        const response = await fetch(
-            "https://api.tvmaze.com/shows/80/episodes"
-        );
-        const jsonbody = await response.json();
-        setEpisodesList([...jsonbody]);
+    const fetchShows = async () => {
+        const response = await fetch("http://api.tvmaze.com/shows?page=1");
+        const jsonbody: Show[] = await response.json();
+        const showInfo = jsonbody.map((show) => {
+            return { id: show.id, name: show.name };
+        });
+        setShowsList([...showInfo]);
     };
 
     useEffect(() => {
-        fetchEpisodes();
+        fetchShows();
     }, []);
 
     const currentEpisodes = episodesList.filter((episode) =>
@@ -52,6 +61,7 @@ function App() {
     return (
         <>
             {" "}
+            <Selector showsList={showsList} setEpisodesList={setEpisodesList} />
             <SearchInput
                 updateSearch={setSearchInput}
                 inputValue={searchInput}
