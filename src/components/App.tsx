@@ -38,7 +38,7 @@ function App() {
     const [showsList, setShowsList] = useState<ShowInfo[]>([]);
 
     const fetchShows = async () => {
-        const response = await fetch("http://api.tvmaze.com/shows?page=1");
+        const response = await fetch("https://api.tvmaze.com/shows?page=1");
         const jsonbody: Show[] = await response.json();
         const showInfo = jsonbody.map((show) => {
             return { id: show.id, name: show.name };
