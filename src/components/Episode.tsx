@@ -1,5 +1,6 @@
 import { IEpisode } from "./App";
 import episodeCode from "../utils/episodecode";
+import removeTags from "../utils/removeTags";
 
 export function Episode({
     name,
@@ -15,7 +16,7 @@ export function Episode({
                 src={image.medium}
                 alt={`Cover of ${episodeCode(season, number)}`}
             />
-            <p>{summary}</p>
+            <p>{removeTags(summary)}</p>
         </div>
     );
 }
