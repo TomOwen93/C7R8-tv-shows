@@ -19,3 +19,22 @@ html {
     column-gap: 30px;
     row-gap: 30px;
 }
+
+.show-card {
+    box-shadow: 3px 3px 5px rgb(66, 65, 65);
+    display: flex;
+    flex-direction: column;
+    margin: 50px;
+    padding: 20px;
+}
+
+.show-card-info {
+    display: flex;
+    gap: 20px;
+    padding: 20px;
+}
+
+.show-metadata {
+    margin-left: auto;
+    min-width: 300px;
+}

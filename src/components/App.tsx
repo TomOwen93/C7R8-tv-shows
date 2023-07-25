@@ -1,11 +1,10 @@
 import "./App.css";
 import SearchInput from "./SearchInput";
 import Footer from "./Footer";
-import Selector from "./Selector";
-import filterInput from "../utils/filterinput";
-import { Episode } from "./Episode";
 import { useEffect, useState } from "react";
 import { Show } from "../utils/ShowInterface";
+import EpisodeContainer from "./EpisodeContainer";
+import ShowsContainer from "./ShowsContainer";
 
 export interface IEpisode {
     id: number;
@@ -30,6 +29,12 @@ export interface IEpisode {
 export interface ShowInfo {
     id: number;
     name: string;
+    image: { medium: string; original: string };
+    summary: string;
+    rating: { average: number | null };
+    genres: string[];
+    status: string;
+    runtime: number;
 }
 
 function App() {
@@ -41,7 +46,16 @@ function App() {
         const response = await fetch("https://api.tvmaze.com/shows?page=1");
         const jsonbody: Show[] = await response.json();
         const showInfo = jsonbody.map((show) => {
-            return { id: show.id, name: show.name };
+            return {
+                id: show.id,
+                name: show.name,
+                image: show.image,
+                summary: show.summary,
+                rating: show.rating,
+                genres: show.genres,
+                status: show.status,
+                runtime: show.runtime,
+            };
         });
         setShowsList([...showInfo]);
     };
@@ -50,24 +64,22 @@ function App() {
         fetchShows();
     }, []);
 
-    const currentEpisodes = episodesList.filter((episode) =>
-        filterInput(episode.name, episode.summary, searchInput)
-    );
-
-    const allEpisodes = currentEpisodes.map((episode) => {
-        return <Episode {...episode} key={episode.id} />;
-    });
-
     return (
         <>
             {" "}
-            <Selector showsList={showsList} setEpisodesList={setEpisodesList} />
             <SearchInput
                 updateSearch={setSearchInput}
                 inputValue={searchInput}
             />
-            <p>{`Displaying ${currentEpisodes.length} / ${episodesList.length} episodes`}</p>
-            <div className="episode-container">{allEpisodes}</div>
+            <ShowsContainer
+                showsList={showsList}
+                searchInput={searchInput}
+                setEpisodesList={setEpisodesList}
+            />
+            <EpisodeContainer
+                episodesList={episodesList}
+                searchInput={searchInput}
+            />
             <Footer />
         </>
     );
