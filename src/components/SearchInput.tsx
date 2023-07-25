@@ -7,7 +7,6 @@ export default function SearchInput({
     updateSearch,
     inputValue,
 }: SearchInputProps): JSX.Element {
-    console.log(inputValue);
     return (
         <>
             <div>

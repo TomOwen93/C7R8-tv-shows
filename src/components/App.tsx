@@ -1,9 +1,8 @@
 import "./App.css";
 import SearchInput from "./SearchInput";
-import episodes from "../episodes.json";
 import { Episode } from "./Episode";
 import Footer from "./Footer";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import filterInput from "../utils/filterinput";
 
 export interface IEpisode {
@@ -28,8 +27,21 @@ export interface IEpisode {
 
 function App() {
     const [searchInput, setSearchInput] = useState("");
+    const [episodesList, setEpisodesList] = useState<IEpisode[]>([]);
 
-    const currentEpisodes = episodes.filter((episode) =>
+    const fetchEpisodes = async () => {
+        const response = await fetch(
+            "https://api.tvmaze.com/shows/80/episodes"
+        );
+        const jsonbody = await response.json();
+        setEpisodesList([...jsonbody]);
+    };
+
+    useEffect(() => {
+        fetchEpisodes();
+    }, []);
+
+    const currentEpisodes = episodesList.filter((episode) =>
         filterInput(episode.name, episode.summary, searchInput)
     );
 
@@ -44,7 +56,7 @@ function App() {
                 updateSearch={setSearchInput}
                 inputValue={searchInput}
             />
-            <p>{`Displaying ${currentEpisodes.length} / ${episodes.length} episodes`}</p>
+            <p>{`Displaying ${currentEpisodes.length} / ${episodesList.length} episodes`}</p>
             <div className="episode-container">{allEpisodes}</div>
             <Footer />
         </>
