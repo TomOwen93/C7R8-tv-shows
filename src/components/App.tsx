@@ -1,9 +1,10 @@
 import "./App.css";
+import SearchInput from "./SearchInput";
 import episodes from "../episodes.json";
 import { Episode } from "./Episode";
 import Footer from "./Footer";
-console.log(`Imported ${episodes.length} episode(s)`);
-console.log(`First episode's name is ${episodes[0].name}`);
+import { useState } from "react";
+import filterInput from "../utils/filterinput";
 
 export interface IEpisode {
     id: number;
@@ -26,12 +27,24 @@ export interface IEpisode {
 }
 
 function App() {
-    const allEpisodes = episodes.map((episode) => {
+    const [searchInput, setSearchInput] = useState("");
+
+    const currentEpisodes = episodes.filter((episode) =>
+        filterInput(episode.name, episode.summary, searchInput)
+    );
+
+    const allEpisodes = currentEpisodes.map((episode) => {
         return <Episode {...episode} key={episode.id} />;
     });
 
     return (
         <>
+            {" "}
+            <SearchInput
+                updateSearch={setSearchInput}
+                inputValue={searchInput}
+            />
+            <p>{`Displaying ${currentEpisodes.length} / ${episodes.length} episodes`}</p>
             <div className="episode-container">{allEpisodes}</div>
             <Footer />
         </>
