@@ -8,22 +8,22 @@ import filterInput from "../utils/filterinput";
 
 export interface IEpisode {
     id: number;
-    url?: string;
+    url: string;
     name: string;
     season: number;
     number: number;
-    type?: string;
-    airdate?: string;
-    airtime?: string;
-    airstamp?: string;
-    rating?: { average: number };
-    runtime?: number;
+    type: string;
+    airdate: string;
+    airtime: string;
+    airstamp: string;
+    rating: { average: number | null };
+    runtime: number;
     image: {
         medium: string;
         original: string;
-    };
-    summary: string;
-    _links?: { self: { href: string } };
+    } | null;
+    summary: string | null;
+    _links: { self: { href: string } };
 }
 
 function App() {
