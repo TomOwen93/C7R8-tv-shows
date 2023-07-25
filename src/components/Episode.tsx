@@ -12,11 +12,13 @@ export function Episode({
     return (
         <div className="episode-card">
             <p>{`${name} - ${episodeCode(season, number)}`} </p>
-            <img
-                src={image.medium}
-                alt={`Cover of ${episodeCode(season, number)}`}
-            />
-            <p>{removeTags(summary)}</p>
+            {image && (
+                <img
+                    src={image.medium}
+                    alt={`Cover of ${episodeCode(season, number)}`}
+                />
+            )}
+            <p>{typeof summary === "string" ? removeTags(summary) : "TBD"}</p>
         </div>
     );
 }
