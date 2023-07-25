@@ -35,7 +35,7 @@ function App() {
             <div className="episode-container">{allEpisodes}</div>
             <Footer />
         </>
-    )
+    );
 }
 
 export default App;
