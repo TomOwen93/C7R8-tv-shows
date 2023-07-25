@@ -11,7 +11,7 @@ export function Episode({
 }: IEpisode): JSX.Element {
     return (
         <div className="episode-card">
-            <p>{`${name} - ${episodeCode(season, number)}`} </p>
+            <h2>{`${name} - ${episodeCode(season, number)}`} </h2>
             {image && (
                 <img
                     src={image.medium}
