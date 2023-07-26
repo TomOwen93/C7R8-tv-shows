@@ -11,6 +11,7 @@ import Selector from "./Selector";
 // utils
 import { Show, IEpisode, ShowInfo } from "../utils/Interfaces";
 import { filterInput, filterSelect } from "../utils/filterinput";
+import episodeCode from "../utils/episodecode";
 
 function App() {
     const [searchInput, setSearchInput] = useState("");
@@ -94,11 +95,15 @@ function App() {
             <Selector
                 optionList={currentShows}
                 handleSelect={handleShowSelection}
-                selectedShow={selectedShow}
+                selectedItemId={selectedShow}
+                prepareDisplayText={(item) => item.name}
             />
             <Selector
                 optionList={filteredBySearch}
                 handleSelect={handleEpisodeSelect}
+                prepareDisplayText={(item) =>
+                    episodeCode(item.season, item.number)
+                }
             />
             {episodesList.length === 0 ? (
                 <ShowsContainer
