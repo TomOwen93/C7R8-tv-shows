@@ -17,6 +17,7 @@ function App() {
     const [episodesList, setEpisodesList] = useState<IEpisode[]>([]);
     const [showsList, setShowsList] = useState<ShowInfo[]>([]);
     const [selectedEpisode, setSelectedEpisode] = useState("All");
+    const [selectedShow, setSelectedShow] = useState("All");
 
     const fetchShows = async () => {
         const response = await fetch("https://api.tvmaze.com/shows?page=1");
@@ -38,6 +39,7 @@ function App() {
 
     const handleShowSelection = (id: string) => {
         setSearchInput("");
+        setSelectedShow(id);
 
         if (id !== "All") {
             setSelectedEpisode("All");
@@ -88,6 +90,7 @@ function App() {
             <Selector
                 optionList={currentShows}
                 handleSelect={handleShowSelection}
+                selectedShow={selectedShow}
             />
             <Selector
                 optionList={episodesList}

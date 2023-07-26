@@ -4,20 +4,29 @@ import { IEpisode, ShowInfo } from "../utils/Interfaces";
 interface SelectorProps {
     optionList: ShowInfo[] | IEpisode[];
     handleSelect: (id: string) => void;
+    selectedShow?: string;
 }
 
 export default function Selector({
     optionList,
     handleSelect,
+    selectedShow,
 }: SelectorProps): JSX.Element {
     return (
         <select onChange={(e) => handleSelect(e.target.value)}>
-            <option value={"All"}>Show All</option>
+            <option selected={selectedShow === "All"} value={"All"}>
+                Show All
+            </option>
             {optionList.map((item) => (
-                <option key={item.id} value={item.id}>
+                <option
+                    selected={selectedShow === item.id.toString()}
+                    key={item.id}
+                    value={item.id}
+                >
                     {item.name}
                 </option>
             ))}
+            <option selected={false}>Select me</option>
         </select>
     );
 }
