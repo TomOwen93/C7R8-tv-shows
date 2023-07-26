@@ -2,9 +2,20 @@
 import { ShowInfo } from "../utils/Interfaces";
 import removeTags from "../utils/removeTags";
 
-export default function ShowCard(show: ShowInfo): JSX.Element {
+interface ShowCardProps {
+    show: ShowInfo;
+    handleShowSelection: (id: string) => void;
+}
+
+export default function ShowCard({
+    show,
+    handleShowSelection,
+}: ShowCardProps): JSX.Element {
     return (
-        <div className="show-card">
+        <button
+            onClick={() => handleShowSelection(show.id.toString())}
+            className="show-card"
+        >
             <h1>{show.name}</h1>
             <div className="show-card-info">
                 <img src={show.image.medium} alt={show.name + "'s cover"} />
@@ -18,6 +29,6 @@ export default function ShowCard(show: ShowInfo): JSX.Element {
                     </ul>{" "}
                 </div>
             </div>
-        </div>
+        </button>
     );
 }

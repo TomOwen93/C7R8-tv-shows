@@ -49,11 +49,14 @@ function App() {
                     showsList={showsList}
                     searchInput={searchInput}
                     setEpisodesList={setEpisodesList}
+                    setSearchInput={setSearchInput}
                 />
             ) : (
                 <EpisodeContainer
                     episodesList={episodesList}
                     searchInput={searchInput}
+                    setEpisodesList={setEpisodesList}
+                    setSearchInput={setSearchInput}
                 />
             )}
             <Footer />
