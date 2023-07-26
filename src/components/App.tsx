@@ -58,17 +58,21 @@ function App() {
         setEpisodesList([...jsonbody]);
     };
 
-    const currentShows = showsList
-        .filter((show) => filterInput(show.name, show.summary, searchInput))
-        .sort((a, b) => (a.name > b.name ? 1 : -1));
+    const currentShows = (
+        episodesList.length > 0
+            ? showsList
+            : showsList.filter((show) =>
+                  filterInput(show.name, show.summary, searchInput)
+              )
+    ).sort((a, b) => (a.name > b.name ? 1 : -1));
 
-    const currentEpisodes = episodesList
-        .filter((episode) =>
-            filterInput(episode.name, episode.summary, searchInput)
-        )
-        .filter((episode) =>
-            filterSelect(selectedEpisode, episode.id.toString())
-        );
+    const filteredBySearch = episodesList.filter((episode) =>
+        filterInput(episode.name, episode.summary, searchInput)
+    );
+
+    const filteredBySelection = filteredBySearch.filter((episode) =>
+        filterSelect(selectedEpisode, episode.id.toString())
+    );
 
     const handleEpisodeSelect = (selectedId: string) => {
         setSelectedEpisode(selectedId);
@@ -93,7 +97,7 @@ function App() {
                 selectedShow={selectedShow}
             />
             <Selector
-                optionList={episodesList}
+                optionList={filteredBySearch}
                 handleSelect={handleEpisodeSelect}
             />
             {episodesList.length === 0 ? (
@@ -103,7 +107,7 @@ function App() {
                 />
             ) : (
                 <EpisodeContainer
-                    episodesList={currentEpisodes}
+                    episodesList={filteredBySelection}
                     searchInput={searchInput}
                     setEpisodesList={setEpisodesList}
                     setSearchInput={setSearchInput}
