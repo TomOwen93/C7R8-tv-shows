@@ -44,15 +44,18 @@ function App() {
                 updateSearch={setSearchInput}
                 inputValue={searchInput}
             />
-            <ShowsContainer
-                showsList={showsList}
-                searchInput={searchInput}
-                setEpisodesList={setEpisodesList}
-            />
-            <EpisodeContainer
-                episodesList={episodesList}
-                searchInput={searchInput}
-            />
+            {episodesList.length === 0 ? (
+                <ShowsContainer
+                    showsList={showsList}
+                    searchInput={searchInput}
+                    setEpisodesList={setEpisodesList}
+                />
+            ) : (
+                <EpisodeContainer
+                    episodesList={episodesList}
+                    searchInput={searchInput}
+                />
+            )}
             <Footer />
         </>
     );
