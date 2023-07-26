@@ -1,36 +1,14 @@
 import "./App.css";
+import { useEffect, useState } from "react";
+
+// components
+import EpisodeContainer from "./EpisodeContainer";
+import ShowsContainer from "./ShowsContainer";
 import SearchInput from "./SearchInput";
 import Footer from "./Footer";
-import Selector from "./Selector";
-import filterInput from "../utils/filterinput";
-import { Episode } from "./Episode";
-import { useEffect, useState } from "react";
-import { Show } from "../utils/ShowInterface";
 
-export interface IEpisode {
-    id: number;
-    url: string;
-    name: string;
-    season: number;
-    number: number;
-    type: string;
-    airdate: string;
-    airtime: string;
-    airstamp: string;
-    rating: { average: number | null };
-    runtime: number;
-    image: {
-        medium: string;
-        original: string;
-    } | null;
-    summary: string | null;
-    _links: { self: { href: string } };
-}
-
-export interface ShowInfo {
-    id: number;
-    name: string;
-}
+// utils
+import { Show, IEpisode, ShowInfo } from "../utils/Interfaces";
 
 function App() {
     const [searchInput, setSearchInput] = useState("");
@@ -39,9 +17,18 @@ function App() {
 
     const fetchShows = async () => {
         const response = await fetch("https://api.tvmaze.com/shows?page=1");
-        const jsonbody: Show[] = await response.json();
-        const showInfo = jsonbody.map((show) => {
-            return { id: show.id, name: show.name };
+        const jsonBody: Show[] = await response.json();
+        const showInfo = jsonBody.map((show) => {
+            return {
+                id: show.id,
+                name: show.name,
+                image: show.image,
+                summary: show.summary,
+                rating: show.rating,
+                genres: show.genres,
+                status: show.status,
+                runtime: show.runtime,
+            };
         });
         setShowsList([...showInfo]);
     };
@@ -50,24 +37,28 @@ function App() {
         fetchShows();
     }, []);
 
-    const currentEpisodes = episodesList.filter((episode) =>
-        filterInput(episode.name, episode.summary, searchInput)
-    );
-
-    const allEpisodes = currentEpisodes.map((episode) => {
-        return <Episode {...episode} key={episode.id} />;
-    });
-
     return (
         <>
             {" "}
-            <Selector showsList={showsList} setEpisodesList={setEpisodesList} />
             <SearchInput
                 updateSearch={setSearchInput}
                 inputValue={searchInput}
             />
-            <p>{`Displaying ${currentEpisodes.length} / ${episodesList.length} episodes`}</p>
-            <div className="episode-container">{allEpisodes}</div>
+            {episodesList.length === 0 ? (
+                <ShowsContainer
+                    showsList={showsList}
+                    searchInput={searchInput}
+                    setEpisodesList={setEpisodesList}
+                    setSearchInput={setSearchInput}
+                />
+            ) : (
+                <EpisodeContainer
+                    episodesList={episodesList}
+                    searchInput={searchInput}
+                    setEpisodesList={setEpisodesList}
+                    setSearchInput={setSearchInput}
+                />
+            )}
             <Footer />
         </>
     );

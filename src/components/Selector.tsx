@@ -1,26 +1,19 @@
-import { ShowInfo, IEpisode } from "./App";
+// utils
+import { ShowInfo } from "../utils/Interfaces";
 
 interface SelectorProps {
     showsList: ShowInfo[];
-    setEpisodesList: React.Dispatch<React.SetStateAction<IEpisode[]>>;
+    handleShowSelection: (id: string) => void;
 }
 
 export default function Selector({
     showsList,
-    setEpisodesList,
+    handleShowSelection,
 }: SelectorProps): JSX.Element {
-    const fetchEpisodes = async (id: string) => {
-        const response = await fetch(
-            `https://api.tvmaze.com/shows/${id}/episodes`
-        );
-        const jsonbody = await response.json();
-        setEpisodesList([...jsonbody]);
-    };
-
     const alphabetical = showsList.sort((a, b) => (a.name > b.name ? 1 : -1));
 
     return (
-        <select onChange={(e) => fetchEpisodes(e.target.value)}>
+        <select onChange={(e) => handleShowSelection(e.target.value)}>
             <option disabled selected>
                 {" "}
                 -- select a show --{" "}

@@ -8,13 +8,11 @@ export default function SearchInput({
     inputValue,
 }: SearchInputProps): JSX.Element {
     return (
-        <>
-            <div>
-                <input
-                    value={inputValue}
-                    onChange={(event) => updateSearch(event.target.value)}
-                ></input>
-            </div>
-        </>
+        <div>
+            <input
+                value={inputValue}
+                onChange={(event) => updateSearch(event.target.value)}
+            ></input>
+        </div>
     );
 }
