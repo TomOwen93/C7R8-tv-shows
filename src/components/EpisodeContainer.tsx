@@ -1,6 +1,8 @@
+// utils
 import filterInput from "../utils/filterinput";
-import { IEpisode } from "./App";
-import { Episode } from "./Episode";
+import { IEpisode } from "../utils/Interfaces";
+// components
+import Episode from "./Episode";
 
 interface EpisodeContainerProps {
     episodesList: IEpisode[];

@@ -1,9 +1,9 @@
-import { ShowInfo, IEpisode } from "./App";
+// utils
+import { ShowInfo, IEpisode } from "../utils/Interfaces";
 
 interface SelectorProps {
     showsList: ShowInfo[];
     setEpisodesList: React.Dispatch<React.SetStateAction<IEpisode[]>>;
-    
 }
 
 export default function Selector({

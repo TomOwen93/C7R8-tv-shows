@@ -1,8 +1,9 @@
-import { IEpisode } from "./App";
+// utils
+import { IEpisode } from "../utils/Interfaces";
 import episodeCode from "../utils/episodecode";
 import removeTags from "../utils/removeTags";
 
-export function Episode({
+export default function Episode({
     name,
     season,
     number,

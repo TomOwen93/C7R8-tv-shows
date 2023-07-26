@@ -1,7 +1,9 @@
-import { ShowInfo, IEpisode } from "./App";
+// components
 import ShowCard from "./ShowCard";
-import filterInput from "../utils/filterinput";
 import Selector from "./Selector";
+// utils
+import { ShowInfo, IEpisode } from "../utils/Interfaces";
+import filterInput from "../utils/filterinput";
 
 interface ShowsListProps {
     showsList: ShowInfo[];

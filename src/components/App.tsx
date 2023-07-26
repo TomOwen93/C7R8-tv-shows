@@ -1,41 +1,14 @@
 import "./App.css";
-import SearchInput from "./SearchInput";
-import Footer from "./Footer";
 import { useEffect, useState } from "react";
-import { Show } from "../utils/ShowInterface";
+
+// components
 import EpisodeContainer from "./EpisodeContainer";
 import ShowsContainer from "./ShowsContainer";
+import SearchInput from "./SearchInput";
+import Footer from "./Footer";
 
-export interface IEpisode {
-    id: number;
-    url: string;
-    name: string;
-    season: number;
-    number: number;
-    type: string;
-    airdate: string;
-    airtime: string;
-    airstamp: string;
-    rating: { average: number | null };
-    runtime: number;
-    image: {
-        medium: string;
-        original: string;
-    } | null;
-    summary: string | null;
-    _links: { self: { href: string } };
-}
-
-export interface ShowInfo {
-    id: number;
-    name: string;
-    image: { medium: string; original: string };
-    summary: string;
-    rating: { average: number | null };
-    genres: string[];
-    status: string;
-    runtime: number;
-}
+// utils
+import { Show, IEpisode, ShowInfo } from "../utils/Interfaces";
 
 function App() {
     const [searchInput, setSearchInput] = useState("");
@@ -44,8 +17,8 @@ function App() {
 
     const fetchShows = async () => {
         const response = await fetch("https://api.tvmaze.com/shows?page=1");
-        const jsonbody: Show[] = await response.json();
-        const showInfo = jsonbody.map((show) => {
+        const jsonBody: Show[] = await response.json();
+        const showInfo = jsonBody.map((show) => {
             return {
                 id: show.id,
                 name: show.name,
