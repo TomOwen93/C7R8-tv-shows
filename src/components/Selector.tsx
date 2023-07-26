@@ -1,26 +1,29 @@
 // utils
-import { ShowInfo } from "../utils/Interfaces";
+import { IEpisode, ShowInfo } from "../utils/Interfaces";
 
 interface SelectorProps {
-    showsList: ShowInfo[];
-    handleShowSelection: (id: string) => void;
+    optionList: ShowInfo[] | IEpisode[];
+    handleSelect: (id: string) => void;
+    selectedShow?: string;
 }
 
 export default function Selector({
-    showsList,
-    handleShowSelection,
+    optionList,
+    handleSelect,
+    selectedShow,
 }: SelectorProps): JSX.Element {
-    const alphabetical = showsList.sort((a, b) => (a.name > b.name ? 1 : -1));
-
     return (
-        <select onChange={(e) => handleShowSelection(e.target.value)}>
-            <option disabled selected>
-                {" "}
-                -- select a show --{" "}
+        <select onChange={(e) => handleSelect(e.target.value)}>
+            <option selected={selectedShow === "All"} value={"All"}>
+                Show All
             </option>
-            {alphabetical.map((show) => (
-                <option key={show.id} value={show.id}>
-                    {show.name}
+            {optionList.map((item) => (
+                <option
+                    selected={selectedShow === item.id.toString()}
+                    key={item.id}
+                    value={item.id}
+                >
+                    {item.name}
                 </option>
             ))}
         </select>

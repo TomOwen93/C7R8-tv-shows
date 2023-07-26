@@ -1,5 +1,5 @@
 // utils
-import filterInput from "../utils/filterinput";
+import { filterInput } from "../utils/filterinput";
 import { IEpisode } from "../utils/Interfaces";
 // components
 import Episode from "./Episode";

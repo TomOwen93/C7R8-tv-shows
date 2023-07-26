@@ -1,4 +1,4 @@
-export default function filterInput(
+export function filterInput(
     name: string,
     summary: string | null,
     searchInput: string
@@ -10,4 +10,11 @@ export default function filterInput(
                 .toLocaleLowerCase()
                 .includes(searchInput.toLocaleLowerCase()))
     );
+}
+
+export function filterSelect(
+    selectedId: string,
+    showId: string
+): boolean | void {
+    return selectedId === "All" ? true : showId === selectedId;
 }
