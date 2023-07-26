@@ -109,8 +109,6 @@ function App() {
                 <EpisodeContainer
                     episodesList={filteredBySelection}
                     searchInput={searchInput}
-                    setEpisodesList={setEpisodesList}
-                    setSearchInput={setSearchInput}
                 />
             )}
             <Footer />
