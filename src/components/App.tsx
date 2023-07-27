@@ -37,18 +37,6 @@ function App() {
         setShowsList([...showInfo]);
     };
 
-    // const handleShowSelection = (id: string) => {
-    //     setSearchInput("");
-    //     setSelectedShow(id);
-
-    //     if (id !== "All") {
-    //         setSelectedEpisode("All");
-    //         fetchEpisodes(id);
-    //     } else {
-    //         setEpisodesList([]);
-    //     }
-    // };
-
     useEffect(() => {
         setSearchInput("");
 
@@ -96,20 +84,24 @@ function App() {
 
     return (
         <>
-            {" "}
-            <SearchInput
-                updateSearch={setSearchInput}
-                inputValue={searchInput}
-            />
-            <Selector
-                optionList={currentShows}
-                handleSelect={setSelectedShow}
-                selectedItemId={selectedShow}
-            />
-            <Selector
-                optionList={filteredBySearch}
-                handleSelect={handleEpisodeSelect}
-            />
+            <div className="header">
+                <h1>TV Show Selector</h1>
+                <SearchInput
+                    updateSearch={setSearchInput}
+                    inputValue={searchInput}
+                />
+                <Selector
+                    optionList={currentShows}
+                    handleSelect={setSelectedShow}
+                    selectedItemId={selectedShow}
+                />
+                {episodesList.length > 0 && (
+                    <Selector
+                        optionList={filteredBySearch}
+                        handleSelect={handleEpisodeSelect}
+                    />
+                )}
+            </div>
             {episodesList.length === 0 ? (
                 <ShowsContainer
                     currentShows={currentShows}

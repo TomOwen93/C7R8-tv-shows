@@ -23,7 +23,7 @@ export default function EpisodeContainer({
 
     return (
         <>
-            <p>{`Displaying ${currentEpisodes.length} / ${episodesList.length} episodes`}</p>
+            <p className="episode-count">{`Displaying ${currentEpisodes.length} / ${episodesList.length} episodes`}</p>
 
             <div className="episode-container">{allEpisodes}</div>
         </>
