@@ -11,7 +11,6 @@ import Selector from "./Selector";
 // utils
 import { Show, IEpisode, ShowInfo } from "../utils/Interfaces";
 import { filterInput, filterSelect } from "../utils/filterinput";
-import episodeCode from "../utils/episodecode";
 
 function App() {
     const [searchInput, setSearchInput] = useState("");
