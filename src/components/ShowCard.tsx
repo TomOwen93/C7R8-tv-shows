@@ -4,16 +4,16 @@ import removeTags from "../utils/removeTags";
 
 interface ShowCardProps {
     show: ShowInfo;
-    handleShowSelection: (id: string) => void;
+    setSelectedShow: React.Dispatch<React.SetStateAction<string>>;
 }
 
 export default function ShowCard({
     show,
-    handleShowSelection,
+    setSelectedShow,
 }: ShowCardProps): JSX.Element {
     return (
         <button
-            onClick={() => handleShowSelection(show.id.toString())}
+            onClick={() => setSelectedShow(show.id.toString())}
             className="show-card"
         >
             <h1>{show.name}</h1>
