@@ -96,14 +96,10 @@ function App() {
                 optionList={currentShows}
                 handleSelect={handleShowSelection}
                 selectedItemId={selectedShow}
-                prepareDisplayText={(item) => item.name}
             />
             <Selector
                 optionList={filteredBySearch}
                 handleSelect={handleEpisodeSelect}
-                prepareDisplayText={(item) =>
-                    episodeCode(item.season, item.number)
-                }
             />
             {episodesList.length === 0 ? (
                 <ShowsContainer
