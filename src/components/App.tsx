@@ -37,24 +37,34 @@ function App() {
         setShowsList([...showInfo]);
     };
 
-    const handleShowSelection = (id: string) => {
-        setSearchInput("");
-        setSelectedShow(id);
+    // const handleShowSelection = (id: string) => {
+    //     setSearchInput("");
+    //     setSelectedShow(id);
 
-        if (id !== "All") {
+    //     if (id !== "All") {
+    //         setSelectedEpisode("All");
+    //         fetchEpisodes(id);
+    //     } else {
+    //         setEpisodesList([]);
+    //     }
+    // };
+
+    useEffect(() => {
+        setSearchInput("");
+
+        if (selectedShow !== "All") {
             setSelectedEpisode("All");
-            fetchEpisodes(id);
+            fetchEpisodes(selectedShow);
         } else {
             setEpisodesList([]);
         }
-    };
+    }, [selectedShow]);
 
     const fetchEpisodes = async (id: string) => {
         const response = await fetch(
             `https://api.tvmaze.com/shows/${id}/episodes`
         );
         const jsonbody = await response.json();
-        setSearchInput("");
         setEpisodesList([...jsonbody]);
     };
 
@@ -93,7 +103,7 @@ function App() {
             />
             <Selector
                 optionList={currentShows}
-                handleSelect={handleShowSelection}
+                handleSelect={setSelectedShow}
                 selectedItemId={selectedShow}
             />
             <Selector
@@ -103,7 +113,7 @@ function App() {
             {episodesList.length === 0 ? (
                 <ShowsContainer
                     currentShows={currentShows}
-                    handleShowSelection={handleShowSelection}
+                    setSelectedShow={setSelectedShow}
                 />
             ) : (
                 <EpisodeContainer

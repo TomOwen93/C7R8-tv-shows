@@ -6,12 +6,12 @@ import { ShowInfo } from "../utils/Interfaces";
 
 interface ShowsListProps {
     currentShows: ShowInfo[];
-    handleShowSelection: (id: string) => void;
+    setSelectedShow: React.Dispatch<React.SetStateAction<string>>;
 }
 
 export default function ShowsContainer({
     currentShows,
-    handleShowSelection,
+    setSelectedShow,
 }: ShowsListProps): JSX.Element {
     return (
         <>
@@ -19,7 +19,7 @@ export default function ShowsContainer({
                 <ShowCard
                     key={show.id}
                     show={show}
-                    handleShowSelection={handleShowSelection}
+                    setSelectedShow={setSelectedShow}
                 />
             ))}
         </>
