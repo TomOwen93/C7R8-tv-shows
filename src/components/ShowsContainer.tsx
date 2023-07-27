@@ -5,17 +5,17 @@ import ShowCard from "./ShowCard";
 import { ShowInfo } from "../utils/Interfaces";
 
 interface ShowsListProps {
-    currentShows: ShowInfo[];
+    showsToDisplay: ShowInfo[];
     setSelectedShow: React.Dispatch<React.SetStateAction<string>>;
 }
 
 export default function ShowsContainer({
-    currentShows,
+    showsToDisplay,
     setSelectedShow,
 }: ShowsListProps): JSX.Element {
     return (
         <div className="shows-container">
-            {currentShows.map((show) => (
+            {showsToDisplay.map((show) => (
                 <ShowCard
                     key={show.id}
                     show={show}
