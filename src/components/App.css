@@ -9,6 +9,20 @@ body {
     margin: 0;
 }
 
+.header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px;
+    gap: 10px;
+    background-color: darkred;
+}
+
+.header > h1 {
+    margin: 0;
+    color: white;
+}
+
 .episode-card {
     display: flex;
     flex-direction: column;
@@ -31,31 +45,72 @@ body {
     row-gap: 30px;
 }
 
-.show-card {
-    box-shadow: 3px 3px 5px rgb(66, 65, 65);
+.shows-container {
     display: flex;
     flex-direction: column;
+    align-items: center;
+}
+
+.show-card {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    max-height: 400px;
     margin: 50px;
-    padding: 20px;
+    width: 60vw;
+    border: none;
+    padding: 0;
+    overflow: hidden;
+
+    border-radius: 50px;
+    background: #2e3436;
+    box-shadow: inset 20px 20px 60px #272c2e, inset -20px -20px 60px #353c3e;
+
+    color: white;
+}
+
+.show-card:hover {
+    cursor: pointer;
+}
+
+.show-card > img {
+    max-height: inherit;
 }
 
 .show-card-info {
     display: flex;
+    align-self: flex-start;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
     gap: 20px;
     padding: 20px;
 }
 
-.show-metadata {
-    margin-left: auto;
-    min-width: 300px;
+.show-card-info > h1 {
+    margin: 0;
 }
 
-.header {
+.show-card-info > hr {
+    width: 100%;
+}
+
+.show-metadata {
+    flex: 1 0 auto;
+    padding: 10px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.show-metadata > ul {
+    padding: 0;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    padding: 10px;
     gap: 10px;
+}
+
+.show-metadata > ul > li {
+    list-style-type: none;
 }
 
 select,
@@ -64,7 +119,7 @@ input {
     border-radius: 10px;
     background-color: white;
     border: none;
-    box-shadow: 4px 4px 10px #9b9b9b, -4px -4px 10px #ffffff;
+    box-shadow: 4px 4px 10px #9b9b9b66, -4px -4px 10px #ffffff66;
     padding: 5px 10px;
     font-size: 16px;
 }

@@ -16,18 +16,19 @@ export default function ShowCard({
             onClick={() => setSelectedShow(show.id.toString())}
             className="show-card"
         >
-            <h1>{show.name}</h1>
+            <img src={show.image.original} alt={show.name + "'s cover"} />
             <div className="show-card-info">
-                <img src={show.image.medium} alt={show.name + "'s cover"} />
+                <h1>{show.name}</h1>
+                <hr />
                 <p>{removeTags(show.summary)}</p>
-                <div className="show-metadata">
-                    <ul>
-                        <li>Rated: {show.rating.average}</li>
-                        <li>Genres: {show.genres.join(", ")}</li>
-                        <li>Status: {show.status}</li>
-                        <li>Runtime: {show.runtime} mins</li>
-                    </ul>{" "}
-                </div>
+            </div>
+            <div className="show-metadata">
+                <ul>
+                    <li>Rated: {show.rating.average}</li>
+                    <li>Genres: {show.genres.join(", ")}</li>
+                    <li>Status: {show.status}</li>
+                    <li>Runtime: {show.runtime} mins</li>
+                </ul>{" "}
             </div>
         </button>
     );
