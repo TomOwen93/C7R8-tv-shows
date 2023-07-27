@@ -25,9 +25,9 @@ export default function Selector({
                     key={item.id}
                     value={item.id}
                 >
-                    {"season" in item
-                        ? episodeCode(item.season, item.number)
-                        : item.name}
+                    {"season" in item &&
+                        `${episodeCode(item.season, item.number)} - `}{" "}
+                    {item.name}
                 </option>
             ))}
         </select>
