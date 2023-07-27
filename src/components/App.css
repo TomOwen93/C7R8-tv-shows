@@ -16,6 +16,11 @@ body {
     padding: 30px;
     gap: 10px;
     background-color: darkred;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    z-index: 10;
+    width: 100%;
 }
 
 .header > h1 {
@@ -29,8 +34,10 @@ body {
     justify-content: flex-start;
     align-items: center;
     border-radius: 20px;
-    box-shadow: 3px 3px 5px rgb(66, 65, 65);
     padding: 20px;
+    background: #2e3436;
+    box-shadow: inset 20px 20px 60px #272c2e, inset -20px -20px 60px #353c3e;
+    color: white;
 }
 
 .episode-count {
@@ -43,12 +50,14 @@ body {
     padding: 20px;
     column-gap: 30px;
     row-gap: 30px;
+    margin-top: 200px;
 }
 
 .shows-container {
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-top: 200px;
 }
 
 .show-card {
@@ -56,7 +65,7 @@ body {
     flex-direction: row;
     align-items: center;
     max-height: 400px;
-    margin: 50px;
+    margin: 20px;
     width: 60vw;
     border: none;
     padding: 0;
