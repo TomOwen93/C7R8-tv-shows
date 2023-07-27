@@ -14,7 +14,7 @@ export default function ShowsContainer({
     setSelectedShow,
 }: ShowsListProps): JSX.Element {
     return (
-        <>
+        <div className="shows-container">
             {currentShows.map((show) => (
                 <ShowCard
                     key={show.id}
@@ -22,6 +22,6 @@ export default function ShowsContainer({
                     setSelectedShow={setSelectedShow}
                 />
             ))}
-        </>
+        </div>
     );
 }
