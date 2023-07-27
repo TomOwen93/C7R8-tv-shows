@@ -5,15 +5,15 @@ import { IEpisode } from "../utils/Interfaces";
 import Episode from "./Episode";
 
 interface EpisodeContainerProps {
-    episodesList: IEpisode[];
+    episodesToDisplay: IEpisode[];
     searchInput: string;
 }
 
 export default function EpisodeContainer({
-    episodesList,
+    episodesToDisplay,
     searchInput,
 }: EpisodeContainerProps): JSX.Element {
-    const currentEpisodes = episodesList.filter((episode) =>
+    const currentEpisodes = episodesToDisplay.filter((episode) =>
         filterInput(episode.name, episode.summary, searchInput)
     );
 
@@ -23,7 +23,7 @@ export default function EpisodeContainer({
 
     return (
         <>
-            <p className="episode-count">{`Displaying ${currentEpisodes.length} / ${episodesList.length} episodes`}</p>
+            <p className="episode-count">{`Displaying ${currentEpisodes.length} / ${episodesToDisplay.length} episodes`}</p>
 
             <div className="episode-container">{allEpisodes}</div>
         </>

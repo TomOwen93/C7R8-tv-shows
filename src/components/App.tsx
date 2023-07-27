@@ -14,9 +14,11 @@ import { filterInput, filterSelect } from "../utils/filterinput";
 
 function App() {
     const [searchInput, setSearchInput] = useState("");
-    const [episodesList, setEpisodesList] = useState<IEpisode[]>([]);
-    const [showsList, setShowsList] = useState<ShowInfo[]>([]);
-    const [selectedEpisode, setSelectedEpisode] = useState("All");
+    const [selectedShowsEpisodes, setSelectedShowsEpisodes] = useState<
+        IEpisode[]
+    >([]);
+    const [allShows, setAllShows] = useState<ShowInfo[]>([]);
+    const [selectedEpisodeId, setSelectedEpisodeId] = useState("All");
     const [selectedShow, setSelectedShow] = useState("All");
 
     const fetchShows = async () => {
@@ -34,17 +36,17 @@ function App() {
                 runtime: show.runtime,
             };
         });
-        setShowsList([...showInfo]);
+        setAllShows([...showInfo]);
     };
 
     useEffect(() => {
         setSearchInput("");
 
         if (selectedShow !== "All") {
-            setSelectedEpisode("All");
+            setSelectedEpisodeId("All");
             fetchEpisodes(selectedShow);
         } else {
-            setEpisodesList([]);
+            setSelectedShowsEpisodes([]);
         }
     }, [selectedShow]);
 
@@ -53,30 +55,30 @@ function App() {
             `https://api.tvmaze.com/shows/${id}/episodes`
         );
         const jsonbody = await response.json();
-        setEpisodesList([...jsonbody]);
+        setSelectedShowsEpisodes([...jsonbody]);
     };
 
-    const currentShows = (
-        episodesList.length > 0
-            ? showsList
-            : showsList.filter((show) =>
+    const showsToDisplay = (
+        selectedShowsEpisodes.length > 0
+            ? allShows
+            : allShows.filter((show) =>
                   filterInput(show.name, show.summary, searchInput)
               )
     ).sort((a, b) => (a.name > b.name ? 1 : -1));
 
-    const filteredBySearch = episodesList.filter((episode) =>
+    const episodesToDisplay = selectedShowsEpisodes.filter((episode) =>
         filterInput(episode.name, episode.summary, searchInput)
     );
 
-    const filteredBySelection = filteredBySearch.filter((episode) =>
-        filterSelect(selectedEpisode, episode.id.toString())
+    const selectedEpisodeToDisplay = episodesToDisplay.filter((episode) =>
+        filterSelect(selectedEpisodeId, episode.id.toString())
     );
 
     const handleEpisodeSelect = (selectedId: string) => {
-        setSelectedEpisode(selectedId);
+        setSelectedEpisodeId(selectedId);
     };
 
-    console.log(selectedEpisode);
+    console.log(selectedEpisodeId);
 
     useEffect(() => {
         fetchShows();
@@ -91,25 +93,29 @@ function App() {
                     inputValue={searchInput}
                 />
                 <Selector
-                    optionList={currentShows}
+                    optionList={showsToDisplay}
                     handleSelect={setSelectedShow}
                     selectedItemId={selectedShow}
                 />
-                {episodesList.length > 0 && (
+                {selectedShowsEpisodes.length > 0 && (
                     <Selector
-                        optionList={filteredBySearch}
+                        optionList={episodesToDisplay}
                         handleSelect={handleEpisodeSelect}
                     />
                 )}
             </div>
-            {episodesList.length === 0 ? (
+            {selectedShowsEpisodes.length === 0 ? (
                 <ShowsContainer
-                    currentShows={currentShows}
+                    showsToDisplay={showsToDisplay}
                     setSelectedShow={setSelectedShow}
                 />
             ) : (
                 <EpisodeContainer
-                    episodesList={filteredBySelection}
+                    episodesToDisplay={
+                        selectedEpisodeToDisplay.length > 1
+                            ? episodesToDisplay
+                            : selectedEpisodeToDisplay
+                    }
                     searchInput={searchInput}
                 />
             )}
