@@ -17,8 +17,10 @@ export default function Selector({
     return (
         <select onChange={(e) => handleSelect(e.target.value)}>
             <option selected={selectedItemId === "All"} value={"All"}>
+                {/* {`All ${optionList.find((item: IEpisode|ShowInfo) => "season" in item) ? "episodes" : "shows"}`} */}
                 Show All
             </option>
+
             {optionList.map((item) => (
                 <option
                     selected={selectedItemId === item.id.toString()}

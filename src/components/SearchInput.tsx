@@ -12,6 +12,7 @@ export default function SearchInput({
             <input
                 value={inputValue}
                 onChange={(event) => updateSearch(event.target.value)}
+                placeholder="Search"
             ></input>
         </div>
     );
