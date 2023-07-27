@@ -113,7 +113,7 @@ function App() {
                     searchInput={searchInput}
                 />
             )}
-            <Footer />
+            <Footer selectedId={selectedShow} />
         </>
     );
 }
